@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>todo list</title>
+    <link href="https://fonts.googleapis.com/css?family=Cabin&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css">
+  </head>
+  <body>
+    <div class="container">
+      <div class="todolist">
+        <h2><%= listTitle %></h2>
+        <div class="list">
+          <% for( let item of items) {%>
+            <div class="list-item">
+              <div class="">
+                <input type="checkbox">
+                <span><%= item.name %></span>
+              </div>
+              <form class="delete-item" action="/delete-item/<%= item._id %>" method="post">
+                <button type="submit" name="list" value="<%= listTitle %>">
+                  <svg fill="currentColor" viewBox="0 -192 426.66667 426" xmlns="http://www.w3.org/2000/svg">
+                    <path d="m405.332031 43h-384c-11.773437 0-21.332031-9.558594-21.332031-21.332031 0-11.777344 9.558594-21.335938 21.332031-21.335938h384c11.777344 0 21.335938 9.558594 21.335938 21.335938 0 11.773437-9.558594 21.332031-21.335938 21.332031zm0 0"/>
+                  </svg>
+                </button>
+              </form>
+            </div>
+          <% } %>
+          </div>
+          <form class="add-new" action="/add-item" method="post">
+            <input type="text" name="newItem" placeholder="add new item">
+            <button type="submit" name="list" value="<%= listTitle %>">
+              <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+                <path d="m256 0c-141.164062 0-256 114.835938-256 256s114.835938 256 256 256 256-114.835938 256-256-114.835938-256-256-256zm0 0" fill="#dd3434"/>
+                <path d="m368 277.332031h-90.667969v90.667969c0 11.777344-9.554687 21.332031-21.332031 21.332031s-21.332031-9.554687-21.332031-21.332031v-90.667969h-90.667969c-11.777344 0-21.332031-9.554687-21.332031-21.332031s9.554687-21.332031 21.332031-21.332031h90.667969v-90.667969c0-11.777344 9.554687-21.332031 21.332031-21.332031s21.332031 9.554687 21.332031 21.332031v90.667969h90.667969c11.777344 0 21.332031 9.554687 21.332031 21.332031s-9.554687 21.332031-21.332031 21.332031zm0 0" fill="#000"/>
+              </svg>
+            </button>
+          </form>
+        </div>
+    </div>
+  </body>
+</html>
