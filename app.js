@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const _ = require('lodash');
 
 mongoose.connect('mongodb://localhost:27017/todo',{ useUnifiedTopology: true , useNewUrlParser: true });
 
@@ -53,7 +54,7 @@ app.get('/',function(req,res){
 // adding item in a list
 app.post('/add-item',(req,res) => {
   let newItem = req.body.newItem;
-  let listTitle = req.body.list;
+  let listTitle = _.lowerCase(req.body.list);
   let item = new Item({
     name : req.body.newItem
   });
@@ -74,7 +75,7 @@ app.post('/add-item',(req,res) => {
 // deleting item from list
 app.post('/delete-item/:id' , (req,res) => {
   let id = req.params.id;
-  let listTitle = req.body.list;
+  let listTitle = _.lowerCase(req.body.list);
   if(listTitle === date){
     Item.deleteOne({_id : id} ,function(err){
       if (err)
@@ -94,7 +95,7 @@ app.post('/delete-item/:id' , (req,res) => {
 // custom list route
 app.get('/:customListTitle',(req,res)=>{
 
-  let customListTitle = req.params.customListTitle;
+  let customListTitle = _.lowerCase(req.params.customListTitle);
 
   List.findOne({name:customListTitle} , (err,foundList)=>{
     if(!err){
@@ -108,7 +109,7 @@ app.get('/:customListTitle',(req,res)=>{
       }
       else{
         res.render('list',{
-          listTitle : foundList.name,
+          listTitle : _.startCase(foundList.name),
           items : foundList.items
         });
       }
