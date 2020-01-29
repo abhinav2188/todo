@@ -109,7 +109,7 @@ app.get('/:customListTitle',(req,res)=>{
       }
       else{
         res.render('list',{
-          listTitle : _.startCase(foundList.name),
+          listTitle : _.capitalize(foundList.name),
           items : foundList.items
         });
       }
